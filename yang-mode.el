@@ -245,9 +245,11 @@ Each list item should be a regexp matching a single identifier.")
 
 (defvar yang-mode-syntax-table nil
   "Syntax table used in yang-mode buffers.")
-(or yang-mode-syntax-table
-    (setq yang-mode-syntax-table
-	  (funcall (c-lang-const c-make-mode-syntax-table yang))))
+(if yang-mode-syntax-table
+    ()
+  (setq yang-mode-syntax-table
+        (funcall (c-lang-const c-make-mode-syntax-table yang)))
+  (modify-syntax-entry ?- "_" yang-mode-syntax-table))
 
 (defvar yang-mode-abbrev-table nil
   "Abbreviation table used in yang-mode buffers.")
